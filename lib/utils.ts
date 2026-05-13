@@ -17,11 +17,11 @@ export function formatDate(date: string | Date | number, formatStr: string = "PP
   }
 }
 
-export function formatPrice(price: number | string, currency: string = "USD"): string {
+export function formatPrice(price: number | string, currency: string = "EUR"): string {
   const amount = typeof price === "string" ? parseFloat(price) : price;
   if (isNaN(amount)) return "—";
 
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("en-EU", {
     style: "currency",
     currency: currency,
   }).format(amount);

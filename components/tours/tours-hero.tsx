@@ -30,35 +30,6 @@ export const ToursHero = () => {
           </div>
         </MaxWidthWrapper>
       </section>
-      <section className="bg-white py-20 relative">
-        <MaxWidthWrapper>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            <div className="lg:col-span-7 space-y-10">
-              <div className="space-y-6">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground font-inria leading-tight">
-                  Luxury Tours & Vacations
-                </h2>
-                <div className="h-1 w-20 bg-primary/20" />
-              </div>
-
-              <p className="text-paragraph text-lg leading-relaxed opacity-90 font-roboto font-light">
-                We have connected discerning travelers with top luxury travel specialists around the world. Exceptional service, handpicked boutique properties, and carefully selected experiences are just the beginning of what&apos;s possible for your luxury vacation. Every moment is thoughtfully curated for you. Use these sample luxury vacation itineraries for inspiration, then rely on the deep local knowledge of destination experts to plan a personalized journey tailored entirely to your preferences.
-              </p>
-
-              <Link
-                href="/contact"
-                className="inline-block bg-black text-white px-12 py-5 text-sm font-bold tracking-widest uppercase transition-all hover:bg-primary"
-              >
-                Get Started
-              </Link>
-            </div>
-            <div className="lg:col-span-5 relative">
-              <TourSidebar isFloating />
-            </div>
-
-          </div>
-        </MaxWidthWrapper>
-      </section>
     </div>
   );
 };

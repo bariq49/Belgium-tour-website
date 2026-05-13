@@ -6,8 +6,6 @@ import { IMAGES } from "@/constants/image-constants";
 import { WhyChooseUs } from "@/components/custom-tours/why-choose-us";
 import { PersonalizedExperiences } from "@/components/custom-tours/personalized-experiences";
 import { TravelWithConfidence } from "@/components/custom-tours/travel-with-confidence";
-import { CustomTourRequestForm } from "@/components/custom-tours/request-form";
-import { AfterSubmitSteps } from "@/components/custom-tours/steps/after-submit-steps";
 import { CustomCTA } from "@/components/shared/cta/custom-cta";
 
 export default function CustomToursPage() {
@@ -18,15 +16,15 @@ export default function CustomToursPage() {
         description="Personalized travel experiences tailored to your interests, pace, and expectations"
         backgroundImage={IMAGES.customTours.banner}
         buttonText="Start Planning"
-        className="h-[500px] md:h-[600px]"
+        buttonLink="/booking/custom-tour"
       />
-      
-      <HowItWorks showBanner={false} />
+      <React.Suspense fallback={<div className="h-20" />}>
+        <PersonalizedExperiences />
+      </React.Suspense>
+      <HowItWorks />
       <WhyChooseUs />
-      <PersonalizedExperiences />
+
       <TravelWithConfidence />
-      <CustomTourRequestForm />
-      <AfterSubmitSteps />
       <CustomCTA />
     </div>
   );

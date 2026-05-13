@@ -22,10 +22,13 @@ export const TourBottomCTA = ({ tour }: TourBottomCTAProps) => {
       </div>
 
       <Link
-        href={`/booking/tour-details?tourId=${tour._id}`}
+        href={tour?.isCustom 
+          ? `/booking/custom-tour?tourId=${tour._id}`
+          : `/booking/tour-details?tourId=${tour._id}`
+        }
         className="w-full md:w-auto bg-black text-white px-12 py-4 text-sm font-semibold hover:bg-primary transition-all whitespace-nowrap text-center"
       >
-        Get Started
+        {tour?.isCustom ? "Customize Your Trip" : "Get Started"}
       </Link>
     </div>
   );

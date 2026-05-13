@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface BannerProps {
   title: string;
@@ -29,11 +30,10 @@ export const Banner = ({
   return (
     <section
       className={cn(
-        "relative h-[600px] md:h-[700px] w-full overflow-hidden flex items-center justify-center text-center px-4",
+        "relative h-[600px] md:h-[500px] w-full overflow-hidden flex items-center justify-center text-center px-4",
         className
       )}
     >
-      {/* Background Image */}
       <Image
         src={backgroundImage}
         alt={title}
@@ -56,7 +56,7 @@ export const Banner = ({
         <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-inria leading-[1.1]">
           {title}
         </h1>
-        
+
         {description && (
           <p className="text-white/90 text-base md:text-lg max-w-2xl font-roboto font-light leading-relaxed">
             {description}
@@ -65,21 +65,19 @@ export const Banner = ({
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
           {buttonText && (
-            <Link
-              href={buttonLink}
-              className="w-full sm:w-auto bg-black border border-white/20 text-white px-12 py-4 text-xs font-bold tracking-widest uppercase transition-all hover:bg-primary hover:border-primary"
-            >
-              {buttonText}
-            </Link>
+            <Button asChild className="w-full sm:w-auto h-auto py-4 px-12 bg-black">
+              <Link href={buttonLink}>
+                {buttonText}
+              </Link>
+            </Button>
           )}
 
           {secondaryButtonText && (
-            <Link
-              href={secondaryButtonLink}
-              className="w-full sm:w-auto bg-white border border-white text-black px-12 py-4 text-xs font-bold tracking-widest uppercase transition-all hover:bg-gray-100"
-            >
-              {secondaryButtonText}
-            </Link>
+            <Button asChild variant="outline" className="w-full sm:w-auto h-auto py-4 px-12 bg-white text-black hover:bg-gray-100">
+              <Link href={secondaryButtonLink}>
+                {secondaryButtonText}
+              </Link>
+            </Button>
           )}
         </div>
       </div>

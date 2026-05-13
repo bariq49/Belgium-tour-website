@@ -14,7 +14,7 @@ export default function AboutPage() {
                 backgroundImage={IMAGES.about.banner}
                 buttonText="Design My Dream Trip"
             />
-            <AboutContent 
+            <AboutContent
                 title="Founded by and for travelers just like you"
                 paragraphs={[
                     "Belgium Private Tours was founded with a singular vision: to transform the way travelers experience Belgium. We believe that every journey should be as unique as the traveler, crafted with care, expertise, and an unwavering commitment to excellence.",
@@ -45,7 +45,7 @@ export default function AboutPage() {
                 imagePosition="left"
             />
 
-            <HowItWorks showBanner={false} />
+            <HowItWorks />
             <Features />
         </div>
     );

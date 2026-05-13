@@ -1,11 +1,17 @@
-
 import { useQuery } from "@tanstack/react-query";
-import { getTours, getTour } from "@/lib/api/tours";
+import { getTours, getTour, getCustomTours } from "@/lib/api/tours";
 
 export const useTours = (params: any) => {
     return useQuery({
         queryKey: ["tours", params],
         queryFn: () => getTours(params),
+    });
+};
+
+export const useCustomTours = (params?: any) => {
+    return useQuery({
+        queryKey: ["tours", "custom", params],
+        queryFn: () => getCustomTours(params),
     });
 };
 

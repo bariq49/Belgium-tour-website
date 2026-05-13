@@ -17,12 +17,13 @@ const SuccessContent = () => {
     const orderNumber = searchParams.get("orderNumber");
 
     const { data: data, isLoading } = useBooking(orderNumber || "");
+    console.log(data)
     const { mutate: downloadReceipt, isPending: isDownloading } = useDownloadBookingReceipt();
     if (!orderNumber) return <InvalidAccessNotice />;
     if (isLoading) return <BookingSuccessSkeleton />;
 
     const booking = data?.data;
-    const payment = booking?.payment;
+    const payment = data?.payment;
     const resolvedOrderNumber = booking?.orderNumber || orderNumber;
     const firstName = booking?.customer?.fullName?.split(" ")[0] || "Guest";
 
@@ -63,7 +64,7 @@ const SuccessContent = () => {
                             paymentMethod={payment?.paymentMethod}
                             paymentStatus={payment?.status}
                             paidOn={payment?.updatedAt || payment?.createdAt}
-                            squareDetails={payment?.squareDetails}
+                            stripeDetails={payment?.stripeDetails}
                         />
                     </div>
                 </div>

@@ -42,21 +42,15 @@ export const TourSidebar = ({ tour, className, isFloating = false }: TourSidebar
           ))}
         </ul>
 
-        {(() => {
-          const tourId = tour?._id || tour?.id;
-          const href = tourId
-            ? `/booking/tour-details?tourId=${tourId}`
-            : "/booking/tour-details";
-
-          return (
-            <Link
-              href={href}
-              className="block w-full bg-black text-white py-5 text-center text-sm font-semibold hover:bg-primary transition-all uppercase tracking-widest"
-            >
-              Get Started
-            </Link>
-          );
-        })()}
+        <Link
+          href={tour?.isCustom 
+            ? `/booking/custom-tour?tourId=${tour?._id || tour?.id}`
+            : `/booking/tour-details?tourId=${tour?._id || tour?.id}`
+          }
+          className="block w-full bg-black text-white py-5 text-center text-sm font-semibold hover:bg-primary transition-all uppercase tracking-widest"
+        >
+          {tour?.isCustom ? "Customize Your Trip" : "Get Started"}
+        </Link>
       </div>
 
       {/* Social Proof */}

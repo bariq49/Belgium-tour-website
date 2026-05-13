@@ -15,12 +15,11 @@ interface PriceBreakdown {
     baseSubtotal?: number;
     total?: number;
 }
-
-interface SquareDetails {
+interface StripeDetails {
     cardBrand?: string;
     cardLast4?: string;
     receiptUrl?: string;
-    paymentId?: string;
+    paymentIntentId?: string;
 }
 
 interface PaymentSummaryCardProps {
@@ -30,7 +29,7 @@ interface PaymentSummaryCardProps {
     paymentMethod?: string;
     paymentStatus?: string;
     paidOn?: string | Date;
-    squareDetails?: SquareDetails;
+    stripeDetails?: StripeDetails;
 }
 
 export const PaymentSummaryCard = ({
@@ -40,11 +39,11 @@ export const PaymentSummaryCard = ({
     paymentMethod,
     paymentStatus,
     paidOn,
-    squareDetails,
+    stripeDetails,
 }: PaymentSummaryCardProps) => {
-    const cardBrand = squareDetails?.cardBrand;
-    const cardLast4 = squareDetails?.cardLast4;
-    const receiptUrl = squareDetails?.receiptUrl;
+    const cardBrand = stripeDetails?.cardBrand;
+    const cardLast4 = stripeDetails?.cardLast4;
+    const receiptUrl = stripeDetails?.receiptUrl;
 
     return (
         <section className="bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100/60 rounded-sm border border-amber-200/50 p-6 shadow-sm">
@@ -74,8 +73,8 @@ export const PaymentSummaryCard = ({
                     icon={<Receipt className="w-3.5 h-3.5" />}
                     label="Transaction ID"
                     value={
-                        squareDetails?.paymentId || transactionId ? (
-                            squareDetails?.paymentId || transactionId
+                        transactionId || stripeDetails?.paymentIntentId ? (
+                            transactionId || stripeDetails?.paymentIntentId
                         ) : (
                             <span className="text-amber-700/40 italic">Pending</span>
                         )
@@ -114,7 +113,7 @@ export const PaymentSummaryCard = ({
                     rel="noopener noreferrer"
                     className="mt-5 inline-flex items-center gap-2 text-xs font-bold text-amber-700 hover:text-amber-800 transition-colors"
                 >
-                    View Square Receipt
+                    View Stripe Receipt
                     <ExternalLink className="w-3 h-3" />
                 </a>
             )}
