@@ -134,7 +134,7 @@ export default function DatePicker({
       ) : (
         <div
           className={cn(
-            "border rounded-md px-4 h-[52px] flex items-center justify-between gap-2 transition cursor-pointer bg-section text-foreground",
+            "border rounded-sm px-4 h-[52px] flex items-center justify-between gap-2 transition cursor-pointer bg-white text-foreground",
             error ? "border-error bg-error/5" : "border-border",
             disabled && "opacity-50 cursor-not-allowed bg-gray-50",
             className

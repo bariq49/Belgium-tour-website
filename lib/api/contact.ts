@@ -2,14 +2,11 @@ import API_ROUTES from "@/config/routes";
 import { api } from "./client";
 
 export interface ContactFormData {
-    firstName: string;
-    lastName: string;
+    fullName: string;
     email: string;
-    phone: string;
-    cartType?: string;
-    rentalDates?: string;
+    phone?: string;
+    inquiryType: string;
     message: string;
-    subject?: string;
 }
 
 export const submitContactForm = async (data: ContactFormData) => {

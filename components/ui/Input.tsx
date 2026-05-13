@@ -143,7 +143,7 @@ export const Input: React.FC<InputProps> = ({
                         rows={rows}
                         placeholder={placeholder}
                         disabled={disabled}
-                        className={cn(inputBase, "h-auto py-4 resize-none", inputError(error))}
+                        className={cn(inputBase, "h-auto py-4 resize-none", icon && "pl-11", inputError(error))}
                     />
                 );
 
@@ -241,7 +241,7 @@ export const Input: React.FC<InputProps> = ({
                             className={cn(
                                 "w-full h-[52px] border shadow-none focus:ring-0 focus:ring-transparent focus-visible:ring-0 focus-visible:ring-transparent transition-all",
                                 fieldRadiusClass,
-                                "text-sm md:text-base bg-section text-foreground",
+                                "text-sm md:text-base bg-white text-foreground",
                                 (!field.value && field.value !== 0) ? "text-gray-400 font-normal" : "text-foreground",
                                 icon ? "pl-10 pr-4" : "px-4",
                                 inputError(error),
@@ -365,7 +365,7 @@ export const Input: React.FC<InputProps> = ({
                             {icon && type !== "date" && type !== "time" && type !== "counter" && (
                                 <span className={cn(
                                     "absolute left-3 text-gray-400 z-10 pointer-events-none",
-                                    type === "textarea" ? "top-3" : "top-1/2 -translate-y-1/2"
+                                    type === "textarea" ? "top-[18px]" : "top-1/2 -translate-y-1/2"
                                 )}>
                                     {icon}
                                 </span>

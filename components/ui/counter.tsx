@@ -31,7 +31,7 @@ export const Counter: React.FC<CounterProps> = ({
 
   return (
     <div className={cn(
-      "flex h-[52px] items-center justify-between border border-border bg-section px-2 overflow-hidden transition-colors rounded-md",
+      "flex h-[52px] items-center justify-between border border-border bg-white px-2 overflow-hidden transition-colors rounded-sm",
       className
     )}>
       <button

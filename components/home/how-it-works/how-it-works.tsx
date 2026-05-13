@@ -63,7 +63,6 @@ export const HowItWorks = ({
       )}
 
       <MaxWidthWrapper className="py-24">
-        {/* Header */}
         <div className={cn(
           "flex flex-col gap-8 mb-20",
           isCentered

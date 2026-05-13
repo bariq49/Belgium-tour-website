@@ -2,52 +2,38 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface BookingStep1Data {
-    location: string;
+    categoryId: string;
 }
 
 export interface BookingStep2Data {
-    pricingId: string;
-    pricing: any | null;
-    addons: {
-        prepaidFuel: boolean;
-        deliveryService: boolean;
-        tripProtection: boolean;
-    };
-}
-
-export interface BookingStep3Data {
-    address: string;
-    agreeCancellation: boolean;
-    agreeRentalAgreement: boolean;
-    driversLicenseImage: string;
-    insuranceImage: string;
-    signature: string;
-}
-
-export interface BookingStep4Data {
+    tourId: string;
+    tourName: string;
+    date: string;
+    travelersCount: number;
+    pickupTime: string;
+    language: string;
     fullName: string;
     email: string;
     phone: string;
-    understandCardFee: boolean;
+    hotelName: string;
+    hotelAddress: string;
+    specialRequests: string;
+    pricePerPerson: number;
 }
+
+
 
 // =============== STATE ===============
 
 interface BookingState {
     step1: BookingStep1Data | null;
     step2: BookingStep2Data | null;
-    step3: BookingStep3Data | null;
-    step4: BookingStep4Data | null;
     settings: any | null;
     setStep1Data: (data: BookingStep1Data) => void;
     setStep2Data: (data: Partial<BookingStep2Data>) => void;
-    setStep3Data: (data: Partial<BookingStep3Data>) => void;
-    setStep4Data: (data: Partial<BookingStep4Data>) => void;
     setSettings: (settings: any) => void;
     clearStep1: () => void;
     clearStep2: () => void;
-    clearStep3: () => void;
-    clearStep4: () => void;
     resetAll: () => void;
 }
 
@@ -59,29 +45,7 @@ export const useBookingStore = create<BookingState>()(
     persist(
         (set) => ({
             step1: null,
-            step2: {
-                pricingId: '',
-                pricing: null,
-                addons: {
-                    prepaidFuel: false,
-                    deliveryService: false,
-                    tripProtection: false,
-                },
-            },
-            step3: {
-                address: '',
-                agreeCancellation: false,
-                agreeRentalAgreement: false,
-                driversLicenseImage: '',
-                insuranceImage: '',
-                signature: '',
-            },
-            step4: {
-                fullName: '',
-                email: '',
-                phone: '',
-                understandCardFee: false,
-            },
+            step2: null,
             settings: null,
 
             setStep1Data: (data) =>
@@ -91,17 +55,7 @@ export const useBookingStore = create<BookingState>()(
 
             setStep2Data: (data) =>
                 set((state) => ({
-                    step2: state.step2 ? { ...state.step2, ...data } : null,
-                })),
-
-            setStep3Data: (data) =>
-                set((state) => ({
-                    step3: state.step3 ? { ...state.step3, ...data } : null,
-                })),
-
-            setStep4Data: (data) =>
-                set((state) => ({
-                    step4: state.step4 ? { ...state.step4, ...data } : null,
+                    step2: { ...(state.step2 || {}), ...data } as BookingStep2Data,
                 })),
 
             setSettings: (settings) =>
@@ -119,22 +73,10 @@ export const useBookingStore = create<BookingState>()(
                     step2: null,
                 }),
 
-            clearStep3: () =>
-                set({
-                    step3: null,
-                }),
-
-            clearStep4: () =>
-                set({
-                    step4: null,
-                }),
-
             resetAll: () =>
                 set({
                     step1: null,
                     step2: null,
-                    step3: null,
-                    step4: null,
                     settings: null,
                 }),
         }),
@@ -146,8 +88,6 @@ export const useBookingStore = create<BookingState>()(
             partialize: (state) => ({
                 step1: state.step1,
                 step2: state.step2,
-                step3: state.step3,
-                step4: state.step4,
                 settings: state.settings,
             }),
         }
@@ -165,5 +105,17 @@ export const useIsStep1Ready = () =>
 
 export const useBookingCalculations = () => {
     return useBookingStore(useShallow((state) => {
+        const step2 = state.step2;
+        if (!step2) return { subtotal: 0, total: 0, travelersCount: 0, pricePerPerson: 0 };
+
+        const subtotal = (step2.pricePerPerson || 650) * (step2.travelersCount || 1);
+        const total = subtotal;
+
+        return {
+            subtotal,
+            total,
+            travelersCount: step2.travelersCount,
+            pricePerPerson: step2.pricePerPerson || 650
+        };
     }));
 };

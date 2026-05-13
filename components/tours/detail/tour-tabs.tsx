@@ -16,7 +16,7 @@ export const TourTabs = ({ activeTab, setActiveTab }: TourTabsProps) => {
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={cn(
-              "pb-4 text-xs font-bold tracking-[0.2em] transition-all relative uppercase",
+              "pb-4 text-base font-semibold transition-all relative uppercase cursor-pointer",
               activeTab === tab
                 ? "text-primary"
                 : "text-paragraph/40 hover:text-paragraph"

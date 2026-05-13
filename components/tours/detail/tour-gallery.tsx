@@ -4,16 +4,18 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-const images = [
-  "/assets/images/banner/about-1.png",
-  "/assets/images/banner/about-2.png",
-  "/assets/images/banner/about-3.png",
-  "/assets/images/banner/home.banner.png",
-  "/assets/images/banner/about-1.png",
-];
+interface TourGalleryProps {
+  coverImage: string;
+  galleryImages: string[];
+}
 
-export const TourGallery = () => {
-  const [activeImage, setActiveImage] = React.useState(images[0]);
+export const TourGallery = ({ coverImage, galleryImages }: TourGalleryProps) => {
+  const allImages = React.useMemo(() => [coverImage, ...galleryImages], [coverImage, galleryImages]);
+  const [activeImage, setActiveImage] = React.useState(allImages[0]);
+
+  React.useEffect(() => {
+    setActiveImage(allImages[0]);
+  }, [allImages]);
 
   return (
     <div className="space-y-4">
@@ -30,7 +32,7 @@ export const TourGallery = () => {
 
       {/* Thumbnails */}
       <div className="grid grid-cols-5 gap-2 md:gap-4">
-        {images.map((img, idx) => (
+        {allImages.map((img, idx) => (
           <button
             key={idx}
             onClick={() => setActiveImage(img)}
