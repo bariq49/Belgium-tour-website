@@ -39,10 +39,6 @@ export default function PartnersPage() {
         title="Elevate Your Clients' Belgian Experience & Earn Competitive Commissions"
         description="Join our exclusive network of travel professionals. Whether you are booking for international clients, managing a global DMC portfolio, or recommending local gems to in-house guests, we provide the luxury vehicles, expert guides, and seamless technology to make you look like a hero."
         backgroundImage={IMAGES.partners.banner}
-        buttonText="Apply Now"
-        buttonLink="#partners-apply"
-        secondaryButtonText="Partner Login"
-        secondaryButtonLink="/partners/login"
       />
 
       <WhoCanPartner />
@@ -53,9 +49,6 @@ export default function PartnersPage() {
         title="How It Works"
         subtitle="3 steps to start earning"
         steps={partnerSteps}
-        showBanner={false}
-        showCTA={false}
-        variant="centered"
         className="bg-white"
       />
 

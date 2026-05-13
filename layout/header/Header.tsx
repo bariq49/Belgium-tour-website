@@ -52,7 +52,7 @@ export default function Header() {
 
                 {/* Book Now Button (Desktop) */}
                 <Link
-                  href="/"
+                  href="/booking/custom-tour"
                   className="bg-black text-white px-6 py-3 font-roboto text-sm font-medium transition-all hover:bg-black/90"
                 >
                   Design My Dream Trip

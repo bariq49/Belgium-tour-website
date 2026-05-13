@@ -37,11 +37,7 @@ function TourDetailsContent() {
   const createBookingMutation = useCreateBooking();
 
   const onSubmit = async (data: any) => {
-    try {
-      await createBookingMutation.mutateAsync({ data, tourData });
-    } catch (error) {
-      // Errors are handled by the hook's onError
-    }
+    await createBookingMutation.mutateAsync({ data, tourData });
   };
 
   return (

@@ -39,7 +39,7 @@ export const useCreateBooking = () => {
             toast.success("Booking created! Redirecting to payment...");
         },
         onError: (error: any) => {
-            const errorMessage = error?.response?.data?.error || error?.response?.data?.message || error?.message || "Something went wrong";
+            const errorMessage = error?.response?.data?.error || error?.message || "Something went wrong";
             toast.error(errorMessage);
         },
     });

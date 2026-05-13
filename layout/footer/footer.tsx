@@ -24,21 +24,21 @@ import { useForm, FormProvider } from "react-hook-form";
 
 const QUICK_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/", label: "About" },
+  { href: "/", label: "FAQ" },
 
 ];
 
 const TOURS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/", label: "About" },
+  { href: "/", label: "FAQ" },
 ];
 
 const SUPPORT_LINKS = [
   { href: "/contact", label: "Contact" },
-  { href: "/terms", label: "Terms & Conditions" },
-  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/", label: "Terms & Conditions" },
+  { href: "/", label: "Privacy Policy" },
 ];
 
 export const Footer = () => {
@@ -96,7 +96,7 @@ export const Footer = () => {
           <div className="lg:col-span-2">
             <FooterColumn title="Quick Links">
               {QUICK_LINKS.map((link) => (
-                <FooterLink key={link.href} href={link.href}>{link.label}</FooterLink>
+                <FooterLink key={link.label} href={link.href}>{link.label}</FooterLink>
               ))}
             </FooterColumn>
           </div>
@@ -105,7 +105,7 @@ export const Footer = () => {
           <div className="lg:col-span-2">
             <FooterColumn title="Tours">
               {TOURS.map((link) => (
-                <FooterLink key={link.href} href={link.href}>{link.label}</FooterLink>
+                <FooterLink key={link.label} href={link.href}>{link.label}</FooterLink>
               ))}
             </FooterColumn>
           </div>
@@ -114,7 +114,7 @@ export const Footer = () => {
           <div className="lg:col-span-2">
             <FooterColumn title="Support">
               {SUPPORT_LINKS.map((link) => (
-                <FooterLink key={link.href} href={link.href}>{link.label}</FooterLink>
+                <FooterLink key={link.label} href={link.href}>{link.label}</FooterLink>
               ))}
             </FooterColumn>
           </div>

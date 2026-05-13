@@ -1,8 +1,10 @@
-import { ToursHero } from "@/components/tours/tours-hero";
+import { Banner } from "@/components/banner/banner";
+import { IMAGES } from "@/constants/image-constants";
 import { TourList } from "@/components/tours/tour-list";
 import { HowItWorks } from "@/components/home/how-it-works/how-it-works";
 import { FaqAccordion } from "@/components/shared/faq-accordion";
 import { Testimonials } from "@/components/home/testimonials/testimonials";
+import { Suspense } from "react";
 
 const tourFaqs = [
   {
@@ -35,24 +37,24 @@ const tourFaqs = [
   },
 ];
 
-import { Suspense } from "react";
-
 export default function ToursPage() {
   return (
     <div className="flex flex-col">
-      <Suspense fallback={<div className="h-[400px] bg-section/20 animate-pulse" />}>
-        <ToursHero />
-      </Suspense>
-      <Suspense fallback={<div className="py-24 text-center">Loading journeys...</div>}>
+      <Banner
+        title="Tours & Vacations"
+        topSubtitle="Private & Tailored"
+        description="Discover tailor-made luxury travel experiences crafted to match your preferences. From handpicked accommodations to exclusive moments."
+        backgroundImage={IMAGES.tours.banner}
+      />
+      <Suspense fallback={<div className="h-40" />}>
         <TourList />
       </Suspense>
-      <HowItWorks showBanner={false} />
+      <HowItWorks />
       <FaqAccordion
         title="Travel Tips for Your Luxury Trip"
         description="Here is everything you need to know about planning your perfect Belgian getaway."
         items={tourFaqs}
       />
-      <Testimonials />
     </div>
   );
 }

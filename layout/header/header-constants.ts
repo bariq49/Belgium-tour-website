@@ -10,7 +10,6 @@ export const NAV_LINKS: NavLink[] = [
   { title: "Home", path: "/" },
   { title: "Tours", path: "/tours" },
   { title: "Custom Tours", path: "/custom-tours" },
-  { title: "Why Choose Us", path: "/why-choose-us" },
   { title: "Partners", path: "/partners" },
   { title: "Contact", path: "/contact" },
 ];

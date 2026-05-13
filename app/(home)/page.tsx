@@ -3,6 +3,7 @@ import { TrustAndCommitment } from "@/components/home/trust-commitment/trust-com
 import { DestinationsSection } from "@/components/home/destinations-section/destinations-section";
 import { DesignJourney } from "@/components/home/design-journey/design-journey";
 import { HowItWorks } from "@/components/home/how-it-works/how-it-works";
+import { ScenicBanner } from "@/components/banner/scenic-banner";
 import { ExperienceTabs } from "@/components/home/experience-tabs/experience-tabs";
 import { Testimonials } from "@/components/home/testimonials/testimonials";
 import { Features } from "@/components/home/features/features";
@@ -14,10 +15,11 @@ export default function HomePage() {
       <TrustAndCommitment />
       <DestinationsSection />
       <DesignJourney />
+      <ScenicBanner />
       <HowItWorks />
       <ExperienceTabs />
-      <Testimonials />
       <Features />
+      <Testimonials />
     </div>
   );
 }

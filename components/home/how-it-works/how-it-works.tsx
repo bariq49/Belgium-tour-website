@@ -1,17 +1,15 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { MaxWidthWrapper } from "@/components/shared/max-width-wrapper";
 import { Compass } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const defaultSteps = [
   {
     number: "1.",
     title: "Share Your Travel Plans Dreams",
-    description: "Begin by telling us about your ideal journey. Let us know your preferred destinations, travel dates, interests, and any special requests. Whether you’re listening to your needs carefully.",
+    description: "Begin by telling us about your ideal journey. Let us know your preferred destinations, travel dates, interests, and any special requests. Whether you’re listening to your needs carefully. In short, we’ll bring your travel dreams to life with a personalized itinerary.",
   },
   {
     number: "2.",
@@ -26,119 +24,55 @@ const defaultSteps = [
 ];
 
 interface HowItWorksProps {
-  showBanner?: boolean;
   title?: string;
   subtitle?: string;
   steps?: { number: string; title: string; description: string }[];
-  variant?: "default" | "centered";
-  showCTA?: boolean;
   className?: string;
 }
 
 export const HowItWorks = ({
-  showBanner = true,
   title = "How It Works",
   subtitle = "Here’s how we create life-enriching, luxury travel experiences",
   steps = defaultSteps,
-  variant = "default",
-  showCTA = true,
   className,
 }: HowItWorksProps) => {
-  const isCentered = variant === "centered";
-
   return (
     <section className={cn("bg-background", className)}>
-      {/* Banner Image */}
-      {showBanner && (
-        <div className="relative w-full h-[300px] md:h-[400px]">
-          <Image
-            src="/assets/images/banner/how-it-works.png"
-            alt="Brussels Panorama"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/10" />
-        </div>
-      )}
-
       <MaxWidthWrapper className="py-24">
-        <div className={cn(
-          "flex flex-col gap-8 mb-20",
-          isCentered
-            ? "items-center text-center max-w-3xl mx-auto"
-            : "md:flex-row md:items-start justify-between border-b border-gray-200 pb-12"
-        )}>
-          <h2 className={cn(
-            "font-bold text-foreground font-inria",
-            isCentered ? "text-3xl md:text-4xl" : "text-4xl md:text-5xl"
-          )}>
+        <div className="mb-20 flex flex-col justify-between gap-8 border-b border-gray-200 pb-12 md:flex-row md:items-start">
+          <h2 className="font-inria text-4xl font-bold text-foreground md:text-5xl">
             {title}
           </h2>
 
-          <div className={cn(
-            "flex items-start gap-4",
-            isCentered ? "flex-col items-center" : "max-w-md"
-          )}>
-            {!isCentered && (
-              <div className="mt-1 p-2 bg-primary/10 rounded-full">
-                <Compass className="w-6 h-6 text-primary" />
-              </div>
-            )}
-            <p className={cn(
-              "text-paragraph leading-snug",
-              isCentered ? "text-sm md:text-base opacity-60 font-roboto font-light" : "text-lg font-medium opacity-80"
-            )}>
+          <div className="flex max-w-md items-start gap-4">
+            <div className="mt-1 rounded-full bg-primary/10 p-2">
+              <Compass className="h-6 w-6 text-primary" />
+            </div>
+            <p className="font-medium text-paragraph opacity-80 leading-snug text-lg">
               {subtitle}
             </p>
           </div>
         </div>
 
         {/* Steps Grid */}
-        <div className={cn(
-          "grid grid-cols-1 md:grid-cols-3 gap-16",
-          showCTA && "mb-20"
-        )}>
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-3">
           {steps.map((step, index) => (
-            <div key={index} className={cn(
-              "space-y-6 group",
-              isCentered && "text-center"
-            )}>
-              <div className={cn(
-                "flex items-baseline gap-4",
-                isCentered ? "flex-col items-center" : ""
-              )}>
-                <span className={cn(
-                  "font-black text-primary/20 group-hover:text-primary transition-colors duration-500",
-                  isCentered ? "text-5xl md:text-6xl font-inria" : "text-6xl"
-                )}>
+            <div key={index} className="group space-y-6">
+              <div className="flex items-baseline gap-4">
+                <span className="text-6xl font-black text-primary/20 transition-colors duration-500 group-hover:text-primary">
                   {step.number}
                 </span>
-                <h3 className="text-2xl font-bold text-foreground leading-tight font-inria">
+                <h3 className="font-inria text-2xl font-bold leading-tight text-foreground">
                   {step.title}
                 </h3>
               </div>
-              <p className="text-paragraph text-base md:text-lg leading-relaxed opacity-70 font-roboto font-light">
+              <p className="font-roboto text-base  font-light text-paragraph opacity-80 font-medium">
                 {step.description}
               </p>
             </div>
           ))}
         </div>
-
-        {/* CTA */}
-        {showCTA && (
-          <div className="flex justify-center">
-            <Button
-              variant="outline"
-              className="px-12 py-6 text-lg border-gray-300 hover:bg-black hover:text-white transition-all duration-300 rounded-sm font-medium bg-white shadow-sm"
-            >
-              Learn More
-            </Button>
-          </div>
-        )}
       </MaxWidthWrapper>
     </section>
   );
 };
-
-

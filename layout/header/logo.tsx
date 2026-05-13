@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { IMAGES } from "@/constants/image-constants";
+
 type LogoVariant = "dark" | "white";
 
 interface LogoProps {
@@ -9,8 +11,8 @@ interface LogoProps {
 }
 
 const LOGO_SRC_BY_VARIANT: Record<LogoVariant, string> = {
-  dark: "/assets/logo/logo-black.png",
-  white: "/assets/logo/logo-white.png",
+  dark: IMAGES.logos.dark,
+  white: IMAGES.logos.white,
 };
 
 export function Logo({ variant = "white", className }: LogoProps) {
