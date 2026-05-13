@@ -35,11 +35,17 @@ const tourFaqs = [
   },
 ];
 
+import { Suspense } from "react";
+
 export default function ToursPage() {
   return (
     <div className="flex flex-col">
-      <ToursHero />
-      <TourList />
+      <Suspense fallback={<div className="h-[400px] bg-section/20 animate-pulse" />}>
+        <ToursHero />
+      </Suspense>
+      <Suspense fallback={<div className="py-24 text-center">Loading journeys...</div>}>
+        <TourList />
+      </Suspense>
       <HowItWorks showBanner={false} />
       <FaqAccordion
         title="Travel Tips for Your Luxury Trip"
