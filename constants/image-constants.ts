@@ -45,6 +45,12 @@ export const IMAGES = {
     dark: "/assets/logo/logo-black.png",
     white: "/assets/logo/logo-white.png",
   },
+  auth: {
+    forgotPassword: "/assets/images/auth/forgot-password.png",
+    login: "/assets/images/auth/login.png",
+    register: "/assets/images/auth/register.png",
+    passwordReset: "/assets/images/auth/password-reset.png",
+  },
 } as const;
 
 export type ImageAsset = typeof IMAGES;

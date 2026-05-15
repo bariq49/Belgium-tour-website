@@ -9,7 +9,7 @@ import { PartnerSupport } from "@/components/partners/partner-support";
 import { TrustedAccredited } from "@/components/partners/trusted-accredited";
 import { PartnerPortal } from "@/components/partners/partner-portal";
 import { ParallaxCTA } from "@/components/shared/cta/parallax-cta";
-import { PartnerApplicationForm } from "@/components/partners/partner-application-form";
+import { PartnerApplicationForm } from "@/components/forms/partner-application-form";
 import { OnboardingSteps } from "@/components/partners/onboarding-steps";
 import { HowItWorks } from "@/components/home/how-it-works/how-it-works";
 

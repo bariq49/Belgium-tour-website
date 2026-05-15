@@ -6,36 +6,44 @@ import { MaxWidthWrapper } from "@/components/shared/max-width-wrapper";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Loader2 } from "lucide-react";
+import { useAuthSignup } from "@/hooks/queries/use-auth";
 
 interface PartnerFormValues {
   firstName: string;
   lastName: string;
   companyName: string;
   partnerType: string;
-  businessEmail: string;
+  email: string;
   phone: string;
   businessProfile: string;
 }
 
 export const PartnerApplicationForm = () => {
+  const { mutate: signup, isPending } = useAuthSignup();
   const methods = useForm<PartnerFormValues>({
     defaultValues: {
       firstName: "",
       lastName: "",
       companyName: "",
       partnerType: "",
-      businessEmail: "",
+      email: "",
       phone: "",
       businessProfile: "",
     },
   });
 
-  const onSubmit = (data: PartnerFormValues) => {
-    console.log("Partner Application Data:", data);
-    toast.success("Application submitted successfully! Our team will review it within 24 hours.");
+
+
+  const onSubmit = async (data: PartnerFormValues) => {
+    await signup({
+      ...data,
+      role: data.partnerType,
+    });
     methods.reset();
   };
+
+
 
   return (
     <section id="partners-apply" className="py-24 bg-white">
@@ -45,13 +53,13 @@ export const PartnerApplicationForm = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-inria">
             Apply to Become a Partner
           </h2>
-          <p className="text-paragraph text-sm md:text-base opacity-70 font-roboto font-light leading-relaxed">
+          <p className="text-paragraph text-sm md:text-base opacity-70 font-roboto font-semibold leading-relaxed">
             Takes less than 2 minutes. We&apos;ll be in touch within 24 hours.
           </p>
         </div>
 
         {/* Form Container */}
-        <div className="max-w-4xl mx-auto bg-[#FAF6F2] p-8 md:p-16 shadow-sm border border-gray-100 rounded-sm">
+        <div className="max-w-4xl mx-auto p-8 md:p-16 shadow-sm border border-gray-100 rounded-sm">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -59,7 +67,7 @@ export const PartnerApplicationForm = () => {
                 <Input
                   name="firstName"
                   label="First Name"
-                  placeholder="Jean"
+                  placeholder="Enter your first name"
                   required
                 />
 
@@ -67,7 +75,7 @@ export const PartnerApplicationForm = () => {
                 <Input
                   name="lastName"
                   label="Last Name"
-                  placeholder="Dupont"
+                  placeholder="Enter your last name"
                   required
                 />
               </div>
@@ -76,25 +84,31 @@ export const PartnerApplicationForm = () => {
               <Input
                 name="companyName"
                 label="Company Name"
-                placeholder="ABC Travel / Hotel Name"
+                placeholder="Enter your company name"
                 required
               />
 
               {/* Partner Type */}
               <Input
                 name="partnerType"
+                type="select"
                 label="Partner Type"
                 placeholder="Select partner type..."
                 required
+                selectOptions={[
+                  { label: "Travel Agency", value: "travel_agency" },
+                  { label: "DMC (Destination Management Company)", value: "dmc" },
+                  { label: "Hotel Partner", value: "hotel_partner" },
+                ]}
               />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Business Email */}
+                {/* Email */}
                 <Input
-                  name="businessEmail"
+                  name="email"
                   type="email"
-                  label="Business Email "
-                  placeholder="email@company.com"
+                  label="Email "
+                  placeholder="Enter your email"
                   required
                 />
 
@@ -103,6 +117,7 @@ export const PartnerApplicationForm = () => {
                   name="phone"
                   type="phone"
                   label="Phone Number"
+                  placeholder="Enter your phone number"
                   required
                 />
               </div>
@@ -110,25 +125,20 @@ export const PartnerApplicationForm = () => {
               {/* Business Profile */}
               <Input
                 name="businessProfile"
-                type="textarea"
-                label="Business Profile"
-                placeholder="e.g. We are a luxury hotel concierge desk in Brussels looking for reliable private tour partners..."
+                type="upload"
+                label="Business Profile (ID, License, or Profile)"
+                placeholder="Upload your business profile or document (PDF, Word, or Image)"
                 required
-                rows={6}
               />
 
               <div className="pt-4 flex flex-col items-center space-y-6">
                 <Button
                   type="submit"
-                  className="bg-black text-white hover:bg-primary transition-all px-12 py-8 text-xs font-bold tracking-widest uppercase rounded-none flex items-center gap-2 group"
+                  className="w-full"
+                  loading={isPending}
                 >
-                  Submit Application
-                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  Submit Application <ChevronRight size={20} className="ml-2" />
                 </Button>
-
-                <p className="text-[10px] text-paragraph/40 font-roboto uppercase tracking-widest text-center">
-                  By submitting you agree to our partner terms. No commitment required.
-                </p>
               </div>
             </form>
           </FormProvider>
