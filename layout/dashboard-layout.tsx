@@ -1,20 +1,34 @@
 "use client";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useSidebar } from "@/store/use-sidebar-store";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Sidebar from "./sidebar";
+import Header from "./sidebar/header";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+    const { collapsed } = useSidebar();
     const location = usePathname();
     return (
-        <div className="min-h-screen bg-gray-100 font-roboto">
-            <div className="page-min-height-semibox px-4 pb-8 pt-6 sm:pt-8 xl:pt-10">
-                <div className="semibox-content-wrapper">
-                    <LayoutWrapper
-                        location={location}
-                    >
-                        {children}
-                    </LayoutWrapper>
+        <div className="min-h-screen bg-background font-roboto">
+            <Header />
+            <Sidebar />
+
+            <div
+                className={cn("content-wrapper transition-all duration-150", {
+                    "xl:ml-[96px]": collapsed,
+                    "xl:ml-[272px]": !collapsed,
+                })}
+            >
+                <div className="page-min-height-semibox px-4 pb-8 pt-6 sm:pt-8 xl:pt-10">
+                    <div className="semibox-content-wrapper">
+                        <LayoutWrapper
+                            location={location}
+                        >
+                            {children}
+                        </LayoutWrapper>
+                    </div>
                 </div>
             </div>
         </div>

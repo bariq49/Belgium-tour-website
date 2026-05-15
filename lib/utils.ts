@@ -34,3 +34,36 @@ export function getInitials(name: string, fallback: string = "AU"): string {
   if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
   return (words[0][0] + words[words.length - 1][0]).toUpperCase();
 }
+
+
+
+export const isLocationMatch = (href?: string, pathname?: string) => {
+  if (!href || !pathname) return false;
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
+
+export const findBestMatch = (menus: any[], pathname: string) => {
+  let bestMatch = { href: "", index: -1, childIndex: -1 };
+
+  menus.forEach((menu, index) => {
+    // Check main href
+    if (menu.href && isLocationMatch(menu.href, pathname)) {
+      if (menu.href.length > bestMatch.href.length) {
+        bestMatch = { href: menu.href, index, childIndex: -1 };
+      }
+    }
+
+    // Check children
+    if (menu.child) {
+      menu.child.forEach((child: any, childIndex: number) => {
+        if (child.href && isLocationMatch(child.href, pathname)) {
+          if (child.href.length > bestMatch.href.length) {
+            bestMatch = { href: child.href, index, childIndex };
+          }
+        }
+      });
+    }
+  });
+
+  return bestMatch;
+};

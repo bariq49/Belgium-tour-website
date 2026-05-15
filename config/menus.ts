@@ -25,37 +25,13 @@ export const menus: MenuItemProps[] = [
     href: "/dashboard",
   },
   {
-    title: "Fleets",
-    icon: Car,
-    href: "/fleets",
-  },
-  {
-    title: "Bookings",
-    icon: CalendarDays,
-    href: "/bookings",
-  },
-  {
-    title: "Payments",
-    icon: CreditCard,
-    href: "/payments",
-  },
-  {
-    title: "Pricing",
-    icon: CreditCard,
-    child: [],
-  },
-  {
     title: "Settings",
     icon: Settings,
     child: [
       {
         title: "Profile Settings",
         href: "/settings/profile",
-      },
-      {
-        title: "Booking Settings",
-        href: "/settings/booking",
-      },
+      }
     ],
   },
 ];

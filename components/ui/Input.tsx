@@ -15,6 +15,7 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Counter } from "./counter";
 import { useGoogleAutocomplete } from "@/hooks/use-google-autocomplete";
+import { ImageUpload } from "@/components/upload/image-upload";
 
 type InputType =
     | "text"
@@ -31,6 +32,7 @@ type InputType =
     | "date"
     | "time"
     | "select"
+    | "upload"
 
 export interface SelectOption {
     label: ReactNode;
@@ -258,6 +260,18 @@ export const Input: React.FC<InputProps> = ({
                             ))}
                         </SelectContent>
                     </Select>
+                );
+
+            case "upload":
+                return (
+                    <ImageUpload
+                        value={field.value}
+                        onChange={field.onChange}
+                        onRemove={() => field.onChange("")}
+                        label={placeholder || "Upload File"}
+                        error={error}
+                        className={inputClassName}
+                    />
                 );
 
             default:
